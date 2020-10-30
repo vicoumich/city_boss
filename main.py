@@ -13,7 +13,7 @@ running = True
 jeu = Game()
 menu = Menu()
 background = menu.image
-
+clock = pygame.time.Clock()
 
 #mise en place des bouton est de leurs rectangles
 button_bot = menu.button_bot
@@ -93,4 +93,4 @@ while running:
             
             if retour_rect.collidepoint(event.pos):
                 jeu = Game()
-
+    clock.tick(30)
