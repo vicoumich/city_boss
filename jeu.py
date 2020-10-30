@@ -3,8 +3,8 @@ import pygame
 
 class Game():
     def __init__(self):
-        self.player1 = Player(100, 10, 20, 1, "ch", False, self)
-        self.bot = Player(100, 10, 20, 1, "ci", True, self)
+        self.player1 = Player(100, 10, 20, 6, "ch", False, self)
+        self.bot = Player(100, 10, 20, 6, "ci", True, self)
         self.pressed = {}
         self.is_playing = False
         self.image = pygame.image.load("pic/street/street1.png")
@@ -13,9 +13,9 @@ class Game():
         self.orientation = True
     def gravity(self):
         if self.player1.rect.y < 400:
-            self.player1.rect.y += 2
+            self.player1.rect.y += 10
         if self.bot.rect.y < 400:
-            self.bot.rect.y += 2
+            self.bot.rect.y += 10
 
 
     def start(self,root_page):

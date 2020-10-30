@@ -59,13 +59,13 @@ class Player(pygame.sprite.Sprite):
         self.image = self.images[self.index]
     
     def on_ground(self):
-        return self.rect.y == 401 or self.rect.y == 400 
+        return self.rect.y > 399
 
     def sauter(self):
-        if self.rect.y > 200 and not self.touch:
-            self.rect.y -= 8
+        if self.rect.y > 150 and not self.touch:
+            self.rect.y -= 22
             
-            if self.rect.y < 200:
+            if self.rect.y < 150:
                 self.touch = True
         if self.on_ground():
             self.touch = False
@@ -106,7 +106,7 @@ class Player(pygame.sprite.Sprite):
                 self.state = 3
             else:
                 a = randint(0, 100)
-                if a == 0 or a == 1 or a == 3 or a == 4 or a == 5 or a == 7:
+                if a in {1, 2}:
                     self.state = 1
                 elif a == 2:
                     self.state = 2
@@ -114,8 +114,6 @@ class Player(pygame.sprite.Sprite):
                     self.state = 3
                 elif a == 8:
                     self.state = 4
-                elif a == 9 or a == 10 or a == 11 or a == 12 or a == 13 or a == 14:
-                    self.state == 5
         
         
         # Mode défensif si il a moins de 30PV
@@ -126,16 +124,14 @@ class Player(pygame.sprite.Sprite):
                 self.state = 3
             else:
                 a = randint(0, 100)
-                if a == 0 or a == 10 or a == 11:
+                if a in {0, 10}:
                     self.state = 1
-                elif a == 1 or a == 2 or a == 9 :
+                elif a in {1, 2, 9} :
                     self.state = 2
-                elif a == 3 or a == 4:
+                elif a in {3, 4}:
                     self.state = 3
                 elif a == 12: 
                     self.state = 4
-                elif a == 13:
-                    self.state = 5
         
         self.action()    
         

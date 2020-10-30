@@ -3,7 +3,7 @@ import pygame
 class Book(pygame.sprite.Sprite):
     def __init__(self, player):
         super().__init__()
-        self.vitesse = 5
+        self.vitesse = 12
         self.image = pygame.image.load("pic/book.png")
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x

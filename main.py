@@ -1,7 +1,6 @@
 import pygame
 from jeu import Game
 from menu import Menu
-from time import sleep
 pygame.init()
 
 
@@ -53,7 +52,6 @@ while running:
     if jeu.is_playing:
         jeu.start(root_page)
     else:
-        sleep(0.02)
         menu.maj_bg()
         background = menu.image
         root_page.blit(button_bot, (500, 230))
@@ -79,7 +77,7 @@ while running:
         elif event.type == pygame.KEYDOWN:
             jeu.pressed[event.key] = True
 
-            if event.key == pygame.K_SPACE and count > 230:
+            if event.key == pygame.K_SPACE and count > 180:
                 jeu.player1.attaque()
                 count = 0
         elif event.type == pygame.KEYUP:
@@ -93,4 +91,4 @@ while running:
             
             if retour_rect.collidepoint(event.pos):
                 jeu = Game()
-    clock.tick(30)
+    clock.tick(80)
