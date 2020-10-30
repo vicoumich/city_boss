@@ -18,6 +18,7 @@ clock = pygame.time.Clock()
 button_bot = menu.button_bot
 button_bot_rect = button_bot.get_rect()
 button_bot_rect.x, button_bot_rect.y = 500, 230
+fps = 30
 
 button_pvp = menu.button_pvp
 button_pvp_rect = button_pvp.get_rect()
@@ -51,12 +52,14 @@ while running:
     #lancement d'une partie 
     if jeu.is_playing:
         jeu.start(root_page)
+        fps = 80
     else:
         menu.maj_bg()
         background = menu.image
         root_page.blit(button_bot, (500, 230))
         root_page.blit(button_pvp, (500, 350))
         root_page.blit(title, (300, -50))
+        fps = 30
         
     # Bot tire
     if count2 > 500:
@@ -91,4 +94,4 @@ while running:
             
             if retour_rect.collidepoint(event.pos):
                 jeu = Game()
-    clock.tick(80)
+    clock.tick(fps)
