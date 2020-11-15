@@ -17,14 +17,24 @@ class Book(pygame.sprite.Sprite):
         # Si le joueur est le joueur 1
         
         if not self.player.is_bot :
-            
             # Vérification des collisions avec le bot ou joueur 2
-            if pygame.sprite.spritecollide(self.player.game.bot, self.player.group_projectiles, False, pygame.sprite.collide_mask):
-                self.delete()
-                self.player.game.bot.vie -= 10
-            else:
-                self.rect.x += self.vitesse
-        
+            if self.player.p == 1:
+                if pygame.sprite.spritecollide(self.player.game.bot, self.player.group_projectiles, False, pygame.sprite.collide_mask) :
+                    self.delete()
+                    self.player.game.bot.vie -= 10
+                else:
+                    self.rect.x += self.vitesse
+            
+            # Si bot est un joueur, vérification collisions avec joueur 1
+            if self.player.p == 2:
+                if pygame.sprite.spritecollide(self.player.game.player1, self.player.group_projectiles, False, pygame.sprite.collide_mask):
+                    self.delete()
+                    self.player.game.player1.vie -= 10
+
+
+                else:
+                    self.rect.x -= self.vitesse
+
         # Si le joueur est un robot ou le joueur 2
         elif self.player.is_bot:
             

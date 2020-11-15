@@ -50,9 +50,14 @@ while running:
         x.move()
 
     #lancement d'une partie 
-    if jeu.is_playing:
+    if jeu.is_playing == 'PVB':
         jeu.start(root_page)
         fps = 80
+
+    elif jeu.is_playing == 'PVP':
+        jeu.start_pvp(root_page)
+        fps = 80
+
     else:
         menu.maj_bg()
         background = menu.image
@@ -62,7 +67,7 @@ while running:
         fps = 30
         
     # Bot tire
-    if count2 > 500:
+    if count2 > 500 and jeu.bot.is_bot:
         count2 = 0
         jeu.bot.attaque()
     
@@ -79,18 +84,34 @@ while running:
         #touche enfoncé ?
         elif event.type == pygame.KEYDOWN:
             jeu.pressed[event.key] = True
-
-            if event.key == pygame.K_SPACE and count > 180:
+            if event.key == pygame.K_SPACE and count > 160 and jeu.bot.is_bot:
                 jeu.player1.attaque()
                 count = 0
+            
+            # Action noueur deux (n'étant pas un robot)
+            elif not jeu.bot.is_bot: 
+                if event.key == pygame.K_SEMICOLON and count > 100:
+                    jeu.player1.attaque()
+                    count = 0
+                
+                if event.key == pygame.K_SPACE and count2 > 100:
+                    jeu.bot.attaque()
+                    count2 = 0
+                
+                
         elif event.type == pygame.KEYUP:
             jeu.pressed[event.key] = False
         
         #Si il y a un clique de souris
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            
             if button_bot_rect.collidepoint(event.pos):
                 background = jeu.image
-                jeu.is_playing = True 
+                jeu.is_playing = 'PVB' 
+            
+            if button_pvp_rect.collidepoint(event.pos):
+                background = jeu.image
+                jeu.is_playing = 'PVP'
             
             if retour_rect.collidepoint(event.pos):
                 jeu = Game()

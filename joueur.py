@@ -3,9 +3,10 @@ from random import randint
 from book import Book
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, vie, degats, spe, vitesse, name, is_bot, game):
+    def __init__(self, vie, degats, spe, vitesse, name, is_bot, game, p):
         super().__init__()
         self.is_bot = is_bot
+        self.p = p
         self.vie = vie
         self.max_vie = vie
         self.degats = degats
