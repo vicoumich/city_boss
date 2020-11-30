@@ -22,6 +22,12 @@ class Book(pygame.sprite.Sprite):
                 if pygame.sprite.spritecollide(self.player.game.bot, self.player.group_projectiles, False, pygame.sprite.collide_mask) :
                     self.delete()
                     self.player.game.bot.vie -= 10
+                
+                # Si livre sort de l'ecran
+                elif self.rect.x > 1580:
+                    self.delete()
+                
+                # Sinon continu d'avancer
                 else:
                     self.rect.x += self.vitesse
             
@@ -30,7 +36,9 @@ class Book(pygame.sprite.Sprite):
                 if pygame.sprite.spritecollide(self.player.game.player1, self.player.group_projectiles, False, pygame.sprite.collide_mask):
                     self.delete()
                     self.player.game.player1.vie -= 10
-
+                    
+                elif self.rect.x < -200:
+                    self.delete()
 
                 else:
                     self.rect.x -= self.vitesse

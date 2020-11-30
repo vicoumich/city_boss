@@ -3,17 +3,23 @@ import pygame
 
 class Game():
     def __init__(self):
+        # Creation des joueurs
         self.player1 = Player(100, 10, 20, 6, "ch", False, self, 1)
         self.bot = Player(100, 10, 20, 6, "ci", True, self, 2)
+
+        #dictionnaire des touches appuyées en direct
         self.pressed = {}
+
         self.is_playing = False
+
         self.image = pygame.image.load("pic/street/street1.png")
         self.finish1 = pygame.transform.scale(pygame.image.load("pic/won1.png"), (500, 100))
         self.finish2 = pygame.transform.scale(pygame.image.load("pic/loose1.png"), (500, 100))
         self.orientation = True
+    
     def gravity(self):
         if self.player1.rect.y < 400:
-            self.player1.rect.y += 10
+            self.player1.rect.y += 10  # Ramene les joueurs vers le sol en permennance
         if self.bot.rect.y < 400:
             self.bot.rect.y += 10
 
@@ -31,7 +37,7 @@ class Game():
             root_page.blit(self.player1.image, self.player1.rect)
             root_page.blit(self.bot.image, self.bot.rect)
 
-            # Affichage des projectiles (le groupe)
+            # Affichage des projectiles (le groupe des projectiles)
             self.player1.group_projectiles.draw(root_page)
             self.bot.group_projectiles.draw(root_page)
             

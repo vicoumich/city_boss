@@ -5,6 +5,7 @@ from book import Book
 class Player(pygame.sprite.Sprite):
     def __init__(self, vie, degats, spe, vitesse, name, is_bot, game, p):
         super().__init__()
+        # Stats du joueur
         self.is_bot = is_bot
         self.p = p
         self.vie = vie
@@ -23,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.images.append(pygame.image.load("pic/{}3.png".format(name)))
         self.index = 0
 
-        # Animation quand le perso se retourne
+        # Animation quand le perso se retourne (a rajouter plus tard)
         self.images2 = []
         self.image2 = pygame.transform.flip(self.image, True, False)
         for image in self.images:
@@ -42,36 +43,36 @@ class Player(pygame.sprite.Sprite):
         self.count = 0
         self.state = 0
     
-    def avancer(self):
+    def avancer(self):  # Permet d'avancer vers la droite
         if self.rect.x < 1280 - 200:
             self.rect.x += self.vitesse
             self._maj_deplacement()
     
-    def reculer(self):
+    def reculer(self):   # Permet de reculer vers la gauche
         if self.rect.x > -50:   
             self.rect.x -= self.vitesse
             self._maj_deplacement()
 
-    def _maj_deplacement(self):
+    def _maj_deplacement(self):    # Mise a jour de l'apparence
         self.index += 1
 
         if self.index >= len(self.images):
             self.index = 0
         self.image = self.images[self.index]
     
-    def on_ground(self):
+    def on_ground(self):   # Verifie sur le joueur est au sol (sert pour le saut)
         return self.rect.y > 399
 
-    def sauter(self):
-        if self.rect.y > 150 and not self.touch:
+    def sauter(self):      # Permet de sauter 
+        if self.rect.y > 150 and not self.touch: 
             self.rect.y -= 22
             
-            if self.rect.y < 150:
+            if self.rect.y < 150:    # touch = limite qui renvoie au sol une fois touchée
                 self.touch = True
         if self.on_ground():
             self.touch = False
 
-    def baisser(self):
+    def baisser(self):   # Permet de se baisser
         self.image = self.accroupi
         a = self.rect.x
         b = self.rect.y
@@ -87,7 +88,7 @@ class Player(pygame.sprite.Sprite):
 #########################
 # Méthode pour le robot #
 #########################
-    def action(self):
+    def action(self):    # Action effectuees en fonction des choix
         if self.state == 1:
             self.reculer()
         elif self.state == 2:
